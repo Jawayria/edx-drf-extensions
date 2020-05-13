@@ -59,6 +59,7 @@ class JwtAuthentication(JSONWebTokenAuthentication):
         return get_setting('JWT_PAYLOAD_MERGEABLE_USER_ATTRIBUTES')
 
     def authenticate(self, request):
+        # TODO: If using JWT Cookie and JWT not in header, then `return None` instead of raising an exception.
         try:
             user_and_auth = super(JwtAuthentication, self).authenticate(request)
 
@@ -67,6 +68,7 @@ class JwtAuthentication(JSONWebTokenAuthentication):
                 return user_and_auth
 
             # Not using JWT cookies, CSRF validation not required
+            # TODO: This should check for JWT Cookie and JWT not in header as well.
             use_jwt_cookie_requested = request.META.get(USE_JWT_COOKIE_HEADER)
             if not use_jwt_cookie_requested:
                 return user_and_auth

@@ -217,6 +217,7 @@ class JwtAuthCookieMiddleware(MiddlewareMixin):
             # For more info, see https://github.com/jpadilla/django-rest-framework-jwt/issues/45#issuecomment-74996698
             request.user = SimpleLazyObject(lambda: _get_user_from_jwt(request, view_func))
 
+        # TODO: Instead of checking for the header, ALWAYS reconstitute the cookie.
         if not use_jwt_cookie_requested:
             metric_value = 'not-requested'
         elif header_payload_cookie and signature_cookie:
