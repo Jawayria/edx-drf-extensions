@@ -38,6 +38,7 @@ Consequences
 
 * Service authentication can take advantage of JWT cookies more often.
 * Services can take advantage of the JWT payload of the JWT cookie more often.
+* Local testing of endpoints will use JWT cookies rather than failing, which has been misleading for engineers.
 * Additional clean-up when retiring `USE_JWT_COOKIE`:
 
   * `USE_JWT_COOKIE` should be removed from frontend-auth.
